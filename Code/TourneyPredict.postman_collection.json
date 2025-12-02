@@ -1,0 +1,109 @@
+
+{
+  "info": {
+    "name": "TourneyPredict API",
+    "_postman_id": "12345-abcde",
+    "description": "API for TourneyPredict backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"phone\": \"+1234567890\" }"
+        },
+        "url": { "raw": "http://localhost:5000/register", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["register"] }
+      }
+    },
+    {
+      "name": "Verify",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"phone\": \"+1234567890\", \"code\": \"123456\" }"
+        },
+        "url": { "raw": "http://localhost:5000/verify", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["verify"] }
+      }
+    },
+    {
+      "name": "Generate Bracket",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:5000/generate_bracket", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["generate_bracket"] }
+      }
+    },
+    {
+      "name": "Create Pool",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"pool_name\": \"WorldCupPool\" }"
+        },
+        "url": { "raw": "http://localhost:5000/create_pool", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["create_pool"] }
+      }
+    },
+    {
+      "name": "Join Pool",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"pool_id\": 1, \"user_id\": \"123456\" }"
+        },
+        "url": { "raw": "http://localhost:5000/join_pool", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["join_pool"] }
+      }
+    },
+    {
+      "name": "Submit Predictions",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"user_id\": \"123456\", \"predictions\": { \"Match1\": { \"winner\": \"Brazil\", \"score\": \"2-0\" } } }"
+        },
+        "url": { "raw": "http://localhost:5000/submit_predictions", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["submit_predictions"] }
+      }
+    },
+    {
+      "name": "Calculate Score",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"user_id\": \"123456\", \"actual_results\": { \"Match1\": { \"winner\": \"Brazil\", \"score\": \"2-0\" } } }"
+        },
+        "url": { "raw": "http://localhost:5000/calculate_score", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["calculate_score"] }
+      }
+    },
+    {
+      "name": "Get Leaderboard",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:5000/get_leaderboard", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["get_leaderboard"] }
+      }
+    },
+    {
+      "name": "Process Payment",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"method\": \"card\", \"amount\": 1.0, \"source\": \"tok_visa\" }"
+        },
+        "url": { "raw": "http://localhost:5000/process_payment", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["process_payment"] }
+      }
+    }
+  ]
+}

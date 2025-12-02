@@ -1,0 +1,7 @@
+
+docker build -t tourney-predict .
+docker tag tourney-predict <your-registry>.azurecr.io/tourney-predict:v1
+docker push <your-registry>.azurecr.io/tourney-predict:v1
+
+az webapp create --resource-group <RG> --plan <AppServicePlan> \
+--name <YourAppName> --deployment-container-image-name <your-registry>.azurecr.io/tourney-predict:v1
