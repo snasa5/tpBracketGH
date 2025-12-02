@@ -1,0 +1,33 @@
+
+version: '3.9'
+services:
+  backend:
+    build:
+      context: ../../backend
+      dockerfile: ../infra/docker/backend.Dockerfile
+    environment:
+      PORT: 8080
+      COSMOS_CONNECTION_STRING: ${COSMOS_CONNECTION_STRING}
+      KEYVAULT_URL: ${KEYVAULT_URL}
+      APPINSIGHTS_KEY: ${APPINSIGHTS_KEY}
+      GOALSERVE_KEY: ${GOALSERVE_KEY}
+      POLYGON_RPC: ${POLYGON_RPC}
+      PRIZE_CONTRACT: ${PRIZE_CONTRACT}
+      PAYOUT_SIGNER_KEY: ${PAYOUT_SIGNER_KEY}
+    ports:
+      - "8080:8080"
+  web:
+    build:
+      context: ../../frontend/web
+      dockerfile: ../infra/docker/frontend-web.Dockerfile
+    environment:
+      NEXT_PUBLIC_API: http://localhost:8080
+    ports:
+      - "3000:3000"
+  blockchain:
+    build:
+      context: ../../blockchain
+      dockerfile: ../infra/docker/blockchain.Dockerfile
+    environment:
+      POLYGON_RPC: ${POLYGON_RPC}
+      PAYOUT_SIGNER_KEY: ${PAYOUT_SIGNER_KEY}
