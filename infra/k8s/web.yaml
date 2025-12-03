@@ -1,4 +1,5 @@
 
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,18 +7,15 @@ metadata:
   labels: { app: tp-web }
 spec:
   replicas: 3
-  selector:
-    matchLabels: { app: tp-web }
+  selector: { matchLabels: { app: tp-web } }
   template:
-    metadata:
-      labels: { app: tp-web }
+    metadata: { labels: { app: tp-web } }
     spec:
       containers:
         - name: tp-web
           image: tpregistry.azurecr.io/tp-web:latest
           imagePullPolicy: Always
-          ports:
-            - containerPort: 3000
+          ports: [ { containerPort: 3000 } ]
           env:
             - name: NEXT_PUBLIC_API
               value: "http://tp-backend-svc"
@@ -28,10 +26,8 @@ metadata:
   name: tp-web-svc
 spec:
   type: LoadBalancer
-  selector:
-    app: tp-web
+  selector: { app: tp-web }
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 3000
-      protocol: TCP
-      name: http

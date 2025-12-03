@@ -1,4 +1,5 @@
 
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,54 +7,17 @@ metadata:
   labels: { app: tp-backend }
 spec:
   replicas: 3
-  selector:
-    matchLabels: { app: tp-backend }
+  selector: { matchLabels: { app: tp-backend } }
   template:
-    metadata:
-      labels: { app: tp-backend }
+    metadata: { labels: { app: tp-backend } }
     spec:
       containers:
         - name: tp-backend
           image: tpregistry.azurecr.io/tp-backend:latest
           imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          env:
-            - name: COSMOS_CONNECTION_STRING
-              valueFrom:
-                secretKeyRef:
-                  name: tp-secrets
-                  key: COSMOS_CONNECTION_STRING
-            - name: KEYVAULT_URL
-              valueFrom:
-                secretKeyRef:
-                  name: tp-secrets
-                  key: KEYVAULT_URL
-            - name: APPINSIGHTS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: tp-secrets
-                  key: APPINSIGHTS_KEY
-            - name: GOALSERVE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: tp-secrets
-                  key: GOALSERVE_KEY
-            - name: POLYGON_RPC
-              valueFrom:
-                secretKeyRef:
-                  name: tp-secrets
-                  key: POLYGON_RPC
-            - name: PRIZE_CONTRACT
-              valueFrom:
-                secretKeyRef:
-                  name: tp-secrets
-                  key: PRIZE_CONTRACT
-            - name: PAYOUT_SIGNER_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: tp-secrets
-                  key: PAYOUT_SIGNER_KEY
+          ports: [ { containerPort: 8080 } ]
+          envFrom:
+            - secretRef: { name: tp-secrets }
 ---
 apiVersion: v1
 kind: Service
@@ -61,10 +25,8 @@ metadata:
   name: tp-backend-svc
 spec:
   type: ClusterIP
-  selector:
-    app: tp-backend
+  selector: { app: tp-backend }
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 8080
-      protocol: TCP
-      name: http

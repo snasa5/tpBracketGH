@@ -22,7 +22,7 @@ export async function verifyPin(id: string, pinPlain: string) {
   return bcrypt.compare(pinPlain, resources[0].pinHash);
 }
 
-function generateSixDigitId(): string {
+export function generateSixDigitId(): string {
   const n = crypto.randomInt(0, 1000000);
   return n.toString().padStart(6, '0');
 }
