@@ -1,5 +1,4 @@
 
-One‑shot production‑grade codebase is now complete:
 
 ✅ Backend APIs (auth, pools, scoring, payouts, Goalserve integration)
 
