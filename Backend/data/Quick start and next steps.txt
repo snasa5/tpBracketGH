@@ -1,0 +1,33 @@
+
+Quick start and next steps
+Run locally:
+
+Step: cd infra/docker
+
+Step: create .env with required variables (Cosmos, Key Vault, Goalserve, Polygon RPC, signer key, contract address).
+
+Step: docker-compose up --build
+
+Deploy to Azure:
+
+Step: Set GitHub secrets:
+
+AZURE_CREDENTIALS: Service principal JSON with contributor to subscription
+
+AZURE_SUBSCRIPTION_ID: Subscription ID
+
+ACR_USERNAME / ACR_PASSWORD: from your ACR
+
+Step: Push to main; workflows will deploy infra and ship images to AKS.
+
+Validation checkpoints:
+
+Auth: Six-digit ID creation, PIN hashing, rate limits on /auth and /payouts.
+
+Scoring: Group-to-finals model including bonus mechanics.
+
+Blockchain: Deploy PrizePayout to Polygon, set PRIZE_CONTRACT env, test payout endpoint.
+
+Goalserve: Verify live scores and match stats endpoints with your key.
+
+Global experience: Confirm uniform UTC times and multilingual strings (10+ languages).
